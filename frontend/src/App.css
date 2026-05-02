@@ -1,0 +1,245 @@
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+}
+
+.subtitle {
+  color: #666;
+  margin-top: -8px;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+  align-items: end;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.controls input,
+.controls select,
+.controls button {
+  padding: 9px 10px;
+  border: 1px solid #d4d4d4;
+  border-radius: 8px;
+}
+
+.controls button {
+  cursor: pointer;
+  background: #111827;
+  color: white;
+  border: 0;
+}
+
+.error {
+  color: #b91c1c;
+}
+
+.results {
+  margin-top: 16px;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.tabs button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  background: #fff;
+}
+
+.tabs button.active {
+  background: #111827;
+  color: #fff;
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.summaryCard {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.summaryCard h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.summaryCard p {
+  margin: 8px 0 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card h3 {
+  margin: 0 0 6px;
+}
+
+.card p {
+  margin: 0;
+  color: #4b5563;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  min-width: 200px;
+}
+
+.meta button {
+  margin-top: 6px;
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #e5edff;
+}
+
+.details {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 16px;
+  height: fit-content;
+}
+
+.details h2 {
+  margin-top: 0;
+}
+
+.detailsList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: #374151;
+}
+
+.aiActions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.aiActions button {
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  background: #111827;
+  color: #fff;
+}
+
+.aiActions .secondaryBtn {
+  background: #4b5563;
+}
+
+.aiPanel {
+  margin-top: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 10px;
+  background: #f9fafb;
+}
+
+.aiPanel h4 {
+  margin: 0 0 6px;
+}
+
+.aiMeta {
+  font-size: 13px;
+  color: #4b5563;
+  margin: 0 0 8px;
+}
+
+.attemptLog {
+  font-size: 12px;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.attemptLog ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
+
+.aiPanel p {
+  margin: 0 0 8px;
+}
+
+.aiListGroup {
+  margin-top: 8px;
+}
+
+.aiListGroup ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.muted {
+  margin-top: 10px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 14px;
+}
+
+.chartCard {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+@media (max-width: 980px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}

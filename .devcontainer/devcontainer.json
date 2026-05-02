@@ -1,0 +1,15 @@
+{
+  "name": "GitHub Repo Insights",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22-bookworm",
+  "forwardPorts": [5000, 5173],
+  "portsAttributes": {
+    "5000": { "label": "Backend API" },
+    "5173": { "label": "Vite frontend" }
+  },
+  "postCreateCommand": "npm ci --prefix backend && npm ci --prefix frontend",
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+# Render Blueprint — https://render.com/docs/blueprint-spec
+# Set secrets in the Render dashboard: MONGODB_URI, GITHUB_TOKEN, AI keys, etc.
+services:
+  - type: web
+    name: github-intelligence-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: ./backend
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: info

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Intelligence Dashboard</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        width: 280px;
+        margin: 0;
+        padding: 12px;
+      }
+      p {
+        margin: 0 0 8px;
+        font-size: 13px;
+        color: #333;
+      }
+      button {
+        width: 100%;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .hint {
+        font-size: 11px;
+        color: #666;
+        margin-top: 8px;
+      }
+      a {
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="status">Loading…</p>
+    <button id="open" type="button" hidden>Open dashboard</button>
+    <p class="hint" id="hint"></p>
+    <p><a href="#" id="opts">Dashboard URL settings</a></p>
+    <script src="popup.js"></script>
+  </body>
+</html>

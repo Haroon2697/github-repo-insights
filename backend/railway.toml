@@ -1,0 +1,9 @@
+# Railway: connect repo with root = backend, or set service root to `backend`.
+# https://docs.railway.app/deploy/dockerfiles
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+healthcheckPath = "/health"
+restartPolicyType = "ON_FAILURE"
