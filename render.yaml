@@ -1,9 +1,10 @@
 # Render Blueprint — https://render.com/docs/blueprint-spec
-# Set secrets in the Render dashboard: MONGODB_URI, GITHUB_TOKEN, AI keys, etc.
+# After connect: set secret env vars in the dashboard (Blueprint marks them below).
 services:
   - type: web
-    name: github-intelligence-backend
+    name: github-repo-insights-api
     runtime: docker
+    branch: main
     dockerfilePath: ./backend/Dockerfile
     dockerContext: ./backend
     plan: free
@@ -13,3 +14,11 @@ services:
         value: production
       - key: LOG_LEVEL
         value: info
+      # Set these in Render → Environment (never commit real values):
+      - key: MONGODB_URI
+        sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      # Optional until you have a Vercel URL; if unset, API allows all origins (see backend app.js)
+      - key: CORS_ORIGIN
+        sync: false

@@ -29,9 +29,9 @@ The dashboard loads that GitHub login automatically (your backend must be reacha
 
 See [extension/README.md](extension/README.md). After loading the unpacked extension, set the dashboard URL in options (e.g. your Vercel app). On GitHub user, org, or repo pages you get a floating link or can use the toolbar popup.
 
-## Deploy
+## Deploy (production)
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for Render/Railway/Docker, Vercel, env vars, Redis, Sentry, and rate limits.
+Open **[DEPLOYMENT.md](DEPLOYMENT.md)** and use the section **“First deploy: Render + Vercel (step-by-step)”** — Blueprint from [`render.yaml`](render.yaml), then Vercel with root **`frontend/`**. Same file covers Railway/Fly, Redis, Sentry, and rate limits.
 
 ## GitHub Codespaces
 

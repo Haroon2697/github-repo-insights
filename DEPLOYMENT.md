@@ -7,6 +7,43 @@
 3. **Trust CI** — `.github/workflows/ci.yml` runs `docker build` on Ubuntu so a broken Dockerfile is caught before or after you merge.
 4. **Skip Docker Desktop** unless you personally want `docker compose` or to debug containers locally.
 
+## First deploy: Render + Vercel (step-by-step)
+
+Do this in order. You need accounts on [MongoDB Atlas](https://www.mongodb.com/atlas), [Render](https://render.com), [Vercel](https://vercel.com), and a [GitHub personal access token](https://github.com/settings/tokens) (classic: enable **repo** read scope for private repos you analyze; public-only works with higher rate limits if you only read public data).
+
+### A — Backend API on Render
+
+1. Sign in at [dashboard.render.com](https://dashboard.render.com) with GitHub.
+2. Click **New** → **Blueprint**. Connect repository **`Haroon2697/github-repo-insights`** (or your fork). Render reads [`render.yaml`](render.yaml) from the repo root.
+3. Apply the blueprint. You should see one web service **`github-repo-insights-api`** (Dockerfile `backend/Dockerfile`, context `backend`).
+4. Open that service → **Environment**. Set at minimum:
+   - **`MONGODB_URI`** — Atlas connection string (same idea as local `backend/.env`).
+   - **`GITHUB_TOKEN`** — your PAT (paste once; Render stores it as a secret).
+5. **`CORS_ORIGIN`** — optional on first deploy. If you leave it empty, the backend allows any origin (`cors()` default). After Vercel is live, set **`CORS_ORIGIN`** to your exact frontend URL (e.g. `https://github-repo-insights.vercel.app`) and redeploy for stricter production behavior.
+6. Wait until the deploy is **Live**. Copy the service URL (e.g. `https://github-repo-insights-api.onrender.com`).
+7. Smoke test: open **`https://<your-service>.onrender.com/health`** — you should see JSON with `"ok": true`.
+
+**Free tier:** the service may sleep after idle time; the first request after sleep can take ~30–60 seconds.
+
+### B — Frontend on Vercel
+
+1. Sign in at [vercel.com](https://vercel.com) with GitHub.
+2. **Add New…** → **Project** → **Import** `Haroon2697/github-repo-insights`.
+3. Set **Root Directory** to **`frontend`** (required).
+4. Under **Environment Variables**, add **`VITE_API_BASE_URL`** = your Render URL **with no trailing slash**, e.g. `https://github-repo-insights-api.onrender.com`.
+5. **Deploy**. When it finishes, open the **`.vercel.app`** URL and try **Load Dashboard**.
+
+### C — Tighten CORS (recommended after B)
+
+1. Render → **github-repo-insights-api** → **Environment** → **`CORS_ORIGIN`** = your Vercel production URL only (comma-separate if you add a custom domain later).
+2. **Manual Deploy** → **Clear build cache & deploy** (or trigger redeploy) so the API picks up the variable.
+
+### D — Browser extension (optional)
+
+In `extension` options, set **Dashboard URL** to your Vercel URL. Share links like `https://<vercel-host>/?username=octocat`.
+
+---
+
 ## Environment variables
 
 ### Backend (Render / Railway / Docker / VPS)
@@ -52,27 +89,16 @@ docker build -f backend/Dockerfile -t gi-backend ./backend
 docker run --env-file backend/.env -p 5000:5000 gi-backend
 ```
 
-## Render
+## Railway or Fly (instead of Render)
 
-1. Create a **Web Service** from this repo.
-2. Use **Docker** and point to `backend/Dockerfile` with context `backend`, or use the included `render.yaml` Blueprint.
-3. Add all env vars in the dashboard (especially `MONGODB_URI`, `CORS_ORIGIN`, `GITHUB_TOKEN`).
-4. Deploy URL → use as `VITE_API_BASE_URL` for the frontend build.
+- **Railway:** New project → deploy from GitHub → set root / Dockerfile to **`backend`**. Add the same env vars as in [Environment variables](#environment-variables). Use the public URL as **`VITE_API_BASE_URL`** on Vercel.
+- **Fly.io:** `fly launch` in `backend/` or deploy the Dockerfile; set secrets for `MONGODB_URI`, `GITHUB_TOKEN`, etc.
 
-## Railway
+## Manual Render web service (no Blueprint)
 
-1. New project → deploy from GitHub; set **root directory** to `backend` (or configure Dockerfile path).
-2. Add the same env vars as Render.
-3. Use the generated public URL for `VITE_API_BASE_URL`.
+If you prefer not to use `render.yaml`: **New** → **Web Service** → connect the repo → **Docker** → Dockerfile path **`backend/Dockerfile`**, Docker build context **`backend`**. Add env vars as above.
 
-## Vercel (frontend)
-
-1. Import the repo; set **Root Directory** to `frontend`.
-2. Framework: Vite.
-3. Environment variable: `VITE_API_BASE_URL` = your backend URL.
-4. Deploy. `vercel.json` enables SPA fallback for client-side routing.
-
-**Shareable links:** `https://<your-vercel-app>/?username=<github_login>` opens the dashboard for that user (after CORS allows your Vercel origin). Optional **browser extension** in `extension/` links from `github.com` profiles/repos to that URL — see `extension/README.md`.
+**Shareable links:** `https://<your-vercel-app>/?username=<github_login>` opens the dashboard for that user (after `CORS_ORIGIN` includes your Vercel origin, if you set it). Optional **browser extension** in `extension/` — see `extension/README.md`.
 
 ## CI
 
