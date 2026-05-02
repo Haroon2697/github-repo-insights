@@ -2,6 +2,15 @@
 
 Rank and explore GitHub repositories with scoring, tags, analytics, and optional AI summaries. Monorepo: **backend** (Express + MongoDB), **frontend** (React + Vite), optional **browser extension** for jumping from GitHub.com to your dashboard.
 
+### Recommended workflow (solo dev)
+
+| Step | What to do |
+|------|------------|
+| **Develop locally** | Use **npm only** — no Docker Desktop required. See Quick start below. |
+| **Ship the API** | Deploy the backend on **Render**, **Railway**, or **Fly** — they build `backend/Dockerfile` or run Node; you set env vars in their UI ([DEPLOYMENT.md](DEPLOYMENT.md)). |
+| **Validate the image** | **GitHub Actions** builds the Docker image on push/PR — your `Dockerfile` is checked without installing Docker on your machine. |
+| **Optional** | Install Docker Desktop only if you want `docker compose` or local container debugging. |
+
 ## Quick start (local)
 
 1. Copy `backend/.env.example` → `backend/.env` and fill `MONGODB_URI`, `GITHUB_TOKEN`, and any AI keys you want.

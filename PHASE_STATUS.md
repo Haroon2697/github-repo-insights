@@ -60,4 +60,4 @@ Phase 7 - Deployment & production readiness (implemented; you deploy to your hos
 - `POST /api/analysis/:username/repos/:githubRepoId/ai-insights`
 
 ## What is Happening Right Now
-Phases 1–7 are implemented in the repo. Deploy backend (Docker/Render/Railway) and frontend (Vercel) using `DEPLOYMENT.md`. Install Docker locally if you want to run `docker compose` on Windows.
+Phases 1–7 are implemented in the repo. Deploy backend (Render/Railway/Fly) and frontend (Vercel) using `DEPLOYMENT.md`. Default workflow: develop with **npm** only; **CI** validates the Docker build — Docker Desktop is optional for local `docker compose`.

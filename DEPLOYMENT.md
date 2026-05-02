@@ -1,5 +1,12 @@
 # Phase 7 — Deployment & production
 
+## Recommended path (no Docker on your PC)
+
+1. **Develop** with `npm` in `backend/` and `frontend/` (see root `README.md`).
+2. **Deploy** the backend on **Render**, **Railway**, or **Fly** — connect the repo or deploy from GitHub; the platform builds `backend/Dockerfile` or uses their Node runtime.
+3. **Trust CI** — `.github/workflows/ci.yml` runs `docker build` on Ubuntu so a broken Dockerfile is caught before or after you merge.
+4. **Skip Docker Desktop** unless you personally want `docker compose` or to debug containers locally.
+
 ## Environment variables
 
 ### Backend (Render / Railway / Docker / VPS)
@@ -26,7 +33,9 @@ Set at **build** time:
 
 Create `frontend/.env.production` locally (do not commit secrets if any) or set the same in the host’s “Environment Variables” UI before build.
 
-## Docker (backend)
+## Docker (backend) — optional locally
+
+Only needed if you install Docker (e.g. Docker Desktop) and want a prod-like run on your machine. **Render/Railway/Fly and CI do not require Docker on your laptop.**
 
 From the **repository root**:
 
